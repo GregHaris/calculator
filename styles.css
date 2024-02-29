@@ -1,4 +1,4 @@
-#container {
+#container{
     margin: 50px 100px;
     padding: 20px;
     display: flex;
@@ -25,7 +25,7 @@
     gap: 1rem;
 }
 
-button {
+button{
     width: 80px;
     height: 80px;
     border-radius: 50px;
@@ -43,4 +43,15 @@ button:hover{
 
 .operator{
     color: rgb(66, 133, 244);
+}
+
+#cancelBtn, #deleteBtn{
+    color: rgb(243, 112, 89);
+}
+
+#equalsToBtn{
+    background-color: rgb(66, 133, 244);
+    font-size: 40px;
+    width: 180px;
+    text-align: center;
 }
