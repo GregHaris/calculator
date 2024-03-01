@@ -35,4 +35,16 @@ function operate(firstNumber, operator, secondNumber) {
     }
 };
 
-console.log(operate(10, "*" , 5))
+let displayDiv = document.querySelector("#display");
+const numberButtons = document.querySelectorAll(".numBtn");
+const cancelBtn = document.querySelector("#cancelBtn");
+
+numberButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        displayDiv.value += button.textContent;
+    });
+});
+
+cancelBtn.addEventListener("click", () => {
+    displayDiv.value = "";
+});
