@@ -28,7 +28,7 @@ function operate(firstNumber, operator, secondNumber) {
             return add(firstNumber, secondNumber);
         case "-":
             return subtract(firstNumber, secondNumber);
-        case "*":
+        case "x":
             return multiply(firstNumber, secondNumber);
         case "/":
             return divide(firstNumber, secondNumber);
@@ -38,11 +38,56 @@ function operate(firstNumber, operator, secondNumber) {
 let displayDiv = document.querySelector("#display");
 const numberButtons = document.querySelectorAll(".numBtn");
 const cancelBtn = document.querySelector("#cancelBtn");
+const operatorBtn = document.querySelectorAll(".operator");
+const percentageBtn = document.querySelector("#percentageBtn");
+
+displayDiv.focus();
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
         displayDiv.value += button.textContent;
     });
+});
+
+operatorBtn.forEach((button) => {
+    button.addEventListener("click", () => {
+        displayDiv.value += button.textContent;
+    });
+});
+
+function percentage(num) {
+    return displayDiv.value = (num/100);
+}
+
+percentageBtn.addEventListener("click", () => {
+    const firstNumber = parseFloat(displayDiv.value);
+    const percentValue = percentage(firstNumber);
+    displayDiv.value = percentValue;
+});
+
+const equalsBtn = document.querySelector("#equalsToBtn");
+equalsBtn.addEventListener("click", () => {
+    const input = displayDiv.value;
+    const [firstStr, operator, secondStr] = input.split(/([+\-%x/])/); // split by operators
+
+    const firstNumber = parseFloat(firstStr);
+    const secondNumber = parseFloat(secondStr);
+
+    if(operator === "%") {
+        percentageBtn.click()
+    } else if(!isNaN(firstNumber) && !isNaN(secondNumber)) {
+        const result = operate(firstNumber, operator, secondNumber);
+        displayDiv.value = result;
+    } else {
+        displayDiv.value = "Error";
+    };
+});
+
+
+displayDiv.addEventListener("keypress", () => {
+    if(event.key === "Enter") {
+        equalsBtn.click()
+    };
 });
 
 cancelBtn.addEventListener("click", () => {
