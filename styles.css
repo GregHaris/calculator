@@ -46,13 +46,16 @@ button:hover{
     color: rgb(66, 133, 244);
 }
 
-#cancelBtn, #deleteBtn{
+#cancelBtn{
     color: rgb(243, 112, 89);
 }
 
 #equalsToBtn{
     background-color: rgb(66, 133, 244);
+    text-align: center;
+}
+
+#cancelBtn, #equalsToBtn{
     font-size: 40px;
     width: 180px;
-    text-align: center;
 }
