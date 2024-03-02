@@ -55,6 +55,10 @@ button:hover{
     text-align: center;
 }
 
+#equalsToBtn:hover{
+    background-color: rgb(120, 168, 245);;
+}
+
 #cancelBtn, #equalsToBtn{
     font-size: 40px;
     width: 180px;
