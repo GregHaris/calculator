@@ -18,10 +18,6 @@ function divide (a, b) {
     return a / b;
 };
 
-let firstNumber;
-let secondNumber;
-let operator = "";
-
 function operate(firstNumber, operator, secondNumber) {
     switch (operator) {
         case "+":
@@ -68,7 +64,7 @@ percentageBtn.addEventListener("click", () => {
 const equalsBtn = document.querySelector("#equalsToBtn");
 equalsBtn.addEventListener("click", () => {
     const input = displayDiv.value;
-    const [firstStr, operator, secondStr] = input.split(/([+\-%x/])/); // split by operators
+    const [firstStr, operator, secondStr] = input.split(/([+\-x/%])/); // split by operators
 
     const firstNumber = parseFloat(firstStr);
     const secondNumber = parseFloat(secondStr);
