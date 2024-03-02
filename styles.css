@@ -42,7 +42,7 @@ button:hover{
     background-color: rgb(119, 120, 121);
 }
 
-.operator{
+.operator, #backspaceBtn{
     color: rgb(66, 133, 244);
 }
 
@@ -50,16 +50,14 @@ button:hover{
     color: rgb(243, 112, 89);
 }
 
+
 #equalsToBtn{
     background-color: rgb(66, 133, 244);
     text-align: center;
+    font-size: 40px;
+    width: 180px;
 }
 
 #equalsToBtn:hover{
     background-color: rgb(120, 168, 245);;
-}
-
-#cancelBtn, #equalsToBtn{
-    font-size: 40px;
-    width: 180px;
 }
