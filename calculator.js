@@ -5,7 +5,6 @@ const calculatorKeys = document.querySelector("#buttons");
 function evaluateExpression(expression) {
     const tokens = expression.split(/\s+/);
     let result = parseFloat(tokens[0]);
-
     for (let i = 1; i < tokens.length; i += 2) {
         const operator = tokens[i];
         const nextNumber = parseFloat(tokens[i + 1]);
@@ -21,14 +20,17 @@ function evaluateExpression(expression) {
                 result *= nextNumber;
                 break;
             case "/":
+                switch(nextNumber) {
+                    case 0:
+                       return displayDiv.textContent = "invalid operation!";
+                }
                 result /= nextNumber;
                 break;
             case "%":
                 result = parseFloat(tokens[i - 1]) / 100;
                 break;
             default:
-                console.error(`Invalid operator: ${operator}`);
-                return "InValid Operation";
+                return  displayDiv.textContent = "error";
         }
     }
 
@@ -46,6 +48,9 @@ calculatorKeys.addEventListener("click", (event) => {
         const expression = displayDiv.value;
         const result = evaluateExpression(expression);
         displayDiv.value = result;
+        // backspace button to delete the last entry
+    } else if (buttonText === "←") {
+        displayDiv.value = displayDiv.value.slice(0, -1);
     } else {
         displayDiv.value += buttonText;
     }
