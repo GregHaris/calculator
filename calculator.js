@@ -1,91 +1,63 @@
-// add function
-function add(a, b) {
-    return a + b;
-};
+const displayDiv = document.querySelector("#display");
+const calculatorKeys = document.querySelector("#buttons");
 
-// subtract function
-function subtract (a, b) {
-    return a - b;
-};
+// Function to perform calculations
+function evaluateExpression(expression) {
+    const tokens = expression.split(/\s+/);
+    let result = parseFloat(tokens[0]);
 
-// multiply function
-function multiply (a, b) {
-    return a * b;
-};
+    for (let i = 1; i < tokens.length; i += 2) {
+        const operator = tokens[i];
+        const nextNumber = parseFloat(tokens[i + 1]);
 
-// divide function
-function divide (a, b) {
-    return a / b;
-};
-
-function operate(firstNumber, operator, secondNumber) {
-    switch (operator) {
-        case "+":
-            return add(firstNumber, secondNumber);
-        case "-":
-            return subtract(firstNumber, secondNumber);
-        case "x":
-            return multiply(firstNumber, secondNumber);
-        case "/":
-            return divide(firstNumber, secondNumber);
+        switch (operator) {
+            case "+":
+                result += nextNumber;
+                break;
+            case "-":
+                result -= nextNumber;
+                break;
+            case "x":
+                result *= nextNumber;
+                break;
+            case "/":
+                result /= nextNumber;
+                break;
+            case "%":
+                result = parseFloat(tokens[i - 1]) / 100;
+                break;
+            default:
+                console.error(`Invalid operator: ${operator}`);
+                return "InValid Operation";
+        }
     }
+
+    return result;
 };
 
-let displayDiv = document.querySelector("#display");
-const numberButtons = document.querySelectorAll(".numBtn");
-const cancelBtn = document.querySelector("#cancelBtn");
-const operatorBtn = document.querySelectorAll(".operator");
-const percentageBtn = document.querySelector("#percentageBtn");
+// Event delegation for button clicks
+calculatorKeys.addEventListener("click", (event) => {
+    const button = event.target;
+    const buttonText = button.textContent;
 
-displayDiv.focus();
-
-numberButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-        displayDiv.value += button.textContent;
-    });
-});
-
-operatorBtn.forEach((button) => {
-    button.addEventListener("click", () => {
-        displayDiv.value += button.textContent;
-    });
-});
-
-function percentage(num) {
-    return displayDiv.value = (num/100);
-}
-
-percentageBtn.addEventListener("click", () => {
-    const firstNumber = parseFloat(displayDiv.value);
-    const percentValue = percentage(firstNumber);
-    displayDiv.value = percentValue;
-});
-
-const equalsBtn = document.querySelector("#equalsToBtn");
-equalsBtn.addEventListener("click", () => {
-    const input = displayDiv.value;
-    const [firstStr, operator, secondStr] = input.split(/([+\-x/%])/); // split by operators
-
-    const firstNumber = parseFloat(firstStr);
-    const secondNumber = parseFloat(secondStr);
-
-    if(operator === "%") {
-        percentageBtn.click()
-    } else if(!isNaN(firstNumber) && !isNaN(secondNumber)) {
-        const result = operate(firstNumber, operator, secondNumber);
+    if (buttonText === "C") {
+        displayDiv.value = "";
+    } else if (buttonText === "=") {
+        const expression = displayDiv.value;
+        const result = evaluateExpression(expression);
         displayDiv.value = result;
     } else {
-        displayDiv.value = "Error";
-    };
+        displayDiv.value += buttonText;
+    }
+});
+
+// Handle Enter key press
+displayDiv.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+        const expression = displayDiv.value;
+        const result = evaluateExpression(expression);
+        displayDiv.value = result;
+    }
 });
 
 
-displayDiv.addEventListener("keypress", () => {
-    if(event.key === "Enter") {
-        equalsBtn.click()
-    };
-});
-
-cancelBtn.addEventListener("click", () => {
-    displayDiv.value = "";
-});
