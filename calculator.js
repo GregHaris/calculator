@@ -48,7 +48,7 @@ function evaluateExpression(expression) {
         }
 
         // check if it contains an operator
-        if(nextNumber.toString().match([/[+\-x/%]/])) {
+        if(nextNumber.toString().match(/[+\-x/%]/)) {
             hasOperator = true;
         }   
     }
@@ -62,7 +62,6 @@ function evaluateExpression(expression) {
 calculatorKeys.addEventListener("click", (event) => {
     const button = event.target;
     const buttonText = button.textContent;
-
     if (buttonText === "C") {
         displayDiv.value = "";
     } else if (buttonText === "=") {
