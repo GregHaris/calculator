@@ -1,10 +1,19 @@
 const displayDiv = document.querySelector("#display");
 const calculatorKeys = document.querySelector("#buttons");
+const decimalButton = document.querySelector("#point");
+const operatorButtons = document.querySelectorAll(".operator");
+
+displayDiv.focus()
 
 // Function to perform calculations
 function evaluateExpression(expression) {
     const tokens = expression.split(/\s+/);
     let result = parseFloat(tokens[0]);
+     // To track if there is decimal point already present
+    let hasDecimal = false;
+    // to track if there is an operator already present
+    let hasOperator = false; 
+
     for (let i = 1; i < tokens.length; i += 2) {
         const operator = tokens[i];
         const nextNumber = parseFloat(tokens[i + 1]);
@@ -32,8 +41,20 @@ function evaluateExpression(expression) {
             default:
                 return  displayDiv.textContent = "error";
         }
+
+        // check if it contains a point
+        if (nextNumber.toString().includes(".")) {
+            hasDecimal = true;
+        }
+
+        // check if it contains an operator
+        if(nextNumber.toString().match([/[+\-x/%]/])) {
+            hasOperator = true;
+        }   
     }
 
+    decimalButton.disabled = hasDecimal;    
+    operatorButtons.forEach(button => (button.disabled = hasOperator));
     return result;
 };
 
