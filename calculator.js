@@ -89,6 +89,25 @@ calculatorKeys.addEventListener("click", (event) => {
     }
 });
 
+displayDiv.addEventListener("keypress", (event) => {
+    // Check if the pressed key is one of the specified keys
+    if (event.key === "+" || event.key === "-" || event.key === "*" || event.key === "/") {
+    // Prevent the default key value from being displayed
+    event.preventDefault();
+
+    // assigned values to be displayed
+    if (event.key === "+") {
+        displayDiv.value += " + "
+    } else if (event.key === "-") {
+        displayDiv.value += " - ";
+    } else if (event.key === "*") {
+        displayDiv.value += " x ";
+    } else if (event.key === "/") {
+        displayDiv.value += " ÷ ";
+    };
+
+}});
+
 // Handle Enter key press
 displayDiv.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
