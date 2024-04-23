@@ -5,6 +5,19 @@ const operatorButtons = document.querySelectorAll(".operator");
 
 displayDiv.focus()
 
+// Allow only numertic keys
+displayDiv.addEventListener("keydown", (event) => {
+    // Allowed keys: numbers, operators, and control keys like backspace
+    const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
+                        '+', '-', '*', '/', '.', 'Backspace', 'Shift', 'Enter',
+                         'ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'];
+    
+    if (!allowedKeys.includes(event.key)) {
+        event.preventDefault();
+        return false;
+    };
+});
+
 // Function to perform calculations
 function evaluateExpression(expression) {
     const tokens = expression.split(/\s+/);
