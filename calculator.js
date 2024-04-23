@@ -41,7 +41,7 @@ function evaluateExpression(expression) {
             case "x":
                 result *= nextNumber;
                 break;
-            case "/":
+            case "÷":
                 switch(nextNumber) {
                     case 0:
                        return displayDiv.textContent = "invalid operation!";
@@ -61,7 +61,7 @@ function evaluateExpression(expression) {
         }
 
         // check if it contains an operator
-        if(nextNumber.toString().match(/[+\-x/%]/)) {
+        if(nextNumber.toString().match(/[+\-x÷%]/)) {
             hasOperator = true;
         }   
     }
