@@ -38,7 +38,7 @@ function evaluateExpression(expression) {
             case "-":
                 result -= nextNumber;
                 break;
-            case "x":
+            case "x" || "*":
                 result *= nextNumber;
                 break;
             case "÷":
